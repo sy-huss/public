@@ -2,7 +2,7 @@ const { ServiceBusClient, ReceiveMode } = require("@azure/service-bus");
 
 // Define connection string and related Service Bus entity names here
 const connectionString =
-  "Endpoint=sb://eaxexp01.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=zr5SKMFwJn3FfTLreF207bO0qAINGQSfI0lPlUAkmxY=;EntityPath=nodejs";
+  "Endpoint=sb://eaxexp01.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=pDZoaBSRvce0VjAy7QbD24ko5D+UnZ4vtIuwMIHBTh0=;EntityPath=nodejs";
 const queueName = "nodejs";
 
 async function main() {
@@ -15,6 +15,12 @@ async function main() {
     const messages = await receiver.receiveMessages(1);
     console.log("Received messages:");
     console.log(messages.map((message) => message.body));
+    console.log(messages.map((message) => message.label));
+    console.log(messages.map((message) => message.contentType));
+    console.log(messages.map((message) => message.correlationId));
+    console.log(messages.map((message) => message.messageId));
+    console.log(messages.map((message) => message.userProperties));
+    console.log(messages.map((message) => message.viaPartitionKey));
 
     await queueClient.close();
   } finally {

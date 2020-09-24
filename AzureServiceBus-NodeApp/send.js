@@ -2,7 +2,7 @@ const { ServiceBusClient } = require("@azure/service-bus");
 
 // Define connection string and related Service Bus entity names here
 const connectionString =
-  "Endpoint=sb://eaxexp01.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=KxGzhmqBex4oRGk+ZQvXCyzgFamxQhgJ2GlDfQbieAU=;EntityPath=nodejs";
+  "Endpoint=sb://eaxexp01.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=aWnwfxGGski3ByAYfsewUskFIM4BLd0TvLKOzjUUHR0=;EntityPath=nodejs";
 const queueName = "nodejs";
 
 async function main() {
@@ -13,12 +13,15 @@ async function main() {
   const sender = queueClient.createSender();
 
   try {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
       const message = {
-        body: `Hello world! ${i}`,
-        label: `Tessa`,
+        body:
+          '{"fullname": "Syed Hussain","email": "syed.hussain@ea360.com","mainphone": "0789023451"}',
+        contentType: "application/json",
+        label: "Contact",
+
         userProperties: {
-          myCustomPropertyName: `my custom property value ${i}`,
+          myCustomPropertyName: "my custom property value",
         },
       };
       console.log(`Sending message: ${message.body}`);
